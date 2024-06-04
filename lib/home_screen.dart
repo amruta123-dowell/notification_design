@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late FlutterLocalNotificationsPlugin flutterNotificationPlugIn =
       FlutterLocalNotificationsPlugin();
+  final MethodChannel _channel = MethodChannel('com.example/custom_layout');
+  // Define a method to load the custom layout
+  Future<String> loadCustomLayout() async {
+    try {
+      final String? layoutInfo =
+          await _channel.invokeMethod<String>('loadCustomLayout');
+      return layoutInfo ?? '';
+    } on PlatformException catch (e) {
+      print("Failed to load custom layout: '${e.message}'.");
+      return '';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
     );
-
+// Example usage in Flutter code
+    String layoutInfo = await loadCustomLayout();
     // Define a notification channel
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'flight_updates', // Channel ID
@@ -48,13 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-    // await flutterNotificationPlugIn.initialize(initializationSettings,
-    //     onDidReceiveNotificationResponse:
-    //         (NotificationResponse response) async {
-    //   if (response.payload != null) {
-    //     print("Notification payload: ${response.payload}");
-    //   }
-    // });
   }
 
   Future<void> showNotification() async {
@@ -82,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void onClickNotification() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
