@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   get: ^4.6.6
   flutter_local_notifications: ^17.1.2
-  awesome_notifications: ^0.9.3+1
+  # awesome_notifications: ^0.9.3+1
   device_info_plus: ^10.1.0
 
 dev_dependencies:

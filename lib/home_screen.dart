@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,18 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late FlutterLocalNotificationsPlugin flutterNotificationPlugIn =
       FlutterLocalNotificationsPlugin();
-  final MethodChannel _channel = MethodChannel('com.example/custom_layout');
-  // Define a method to load the custom layout
-  Future<String> loadCustomLayout() async {
-    try {
-      final String? layoutInfo =
-          await _channel.invokeMethod<String>('loadCustomLayout');
-      return layoutInfo ?? '';
-    } on PlatformException catch (e) {
-      print("Failed to load custom layout: '${e.message}'.");
-      return '';
-    }
-  }
+  final MethodChannel platformChannel =
+      const MethodChannel("flutter/notifications");
 
   @override
   void initState() {
@@ -47,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
     );
-// Example usage in Flutter code
-    String layoutInfo = await loadCustomLayout();
+
     // Define a notification channel
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'flight_updates', // Channel ID
@@ -90,6 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  showNotificationPlatformChannel() async {
+    try {
+      await platformChannel.invokeMethod('showCustomNotification');
+    } catch (e) {
+      log("error string -----> $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,8 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 20),
           InkWell(
-            onTap: () {
-              showNotification();
+            onTap: () async {
+              showNotificationPlatformChannel();
             },
             child: Container(
               height: 30,

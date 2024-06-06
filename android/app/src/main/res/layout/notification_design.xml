@@ -1,18 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
 
+    android:background="#FFFFFF">
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Air_India"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Air India"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_red_dark"
+
+
+        android:layout_marginStart="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/flight_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI 540"
+            android:paddingTop="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_dark"
+
+
+            android:layout_marginStart="10dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/flight_number"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/holo_green_dark"
+            >
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ON TIME"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+
+                android:layout_marginStart="10dp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:padding = "30dp"
+        >
 
-    <TextView
-        android:id="@+id/textView2"
+        <TextView
+            android:id="@+id/departure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABC"
+            android:paddingEnd="40dp"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:id="@+id/arrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAA"
+            android:textSize="18sp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+        android:orientation="horizontal"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:padding = "30dp"  >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding = "30dp">
+
+            <TextView
+                android:id="@+id/departure_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20:40"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/gate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GATE 34B"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding = "30dp"
+            >
+
+            <TextView
+                android:id="@+id/arrival_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="23:22"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/seat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEAT 17F"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:layout_marginTop="10dp"-->
+<!--        style="@android:style/Widget.ProgressBar.Horizontal"-->
+<!--        android:progress="84"-->
+<!--        android:progressTint="@android:color/holo_orange_dark"/>-->
+
+    <TextView
+        android:id="@+id/boarding_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Boarding ends in 50:19"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"/>
+
+</RelativeLayout>
