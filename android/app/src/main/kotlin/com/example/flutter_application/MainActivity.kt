@@ -24,8 +24,8 @@ class MainActivity : FlutterActivity() {
         createNotificationChannel()
         MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, channel).setMethodCallHandler { call: MethodCall, result: MethodChannel.Result ->
             if (call.method == "showCustomNotification") {
-
-                showCustomNotification()
+                 val data = call.arguments as Map<String, String>
+                showCustomNotification(data)
                 result.success(null)
             } else {
                 result.notImplemented()
@@ -46,9 +46,19 @@ class MainActivity : FlutterActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-    private fun showCustomNotification() {
-        val notificationLayout = RemoteViews(packageName, R.layout.notification_design)
+    private fun showCustomNotification(data: Map<String, String>) {
+//        val notificationLayout = RemoteViews(packageName, R.layout.notification_design)
+        val notificationLayout = RemoteViews(packageName, R.layout.notification_design).apply {
+            setTextViewText(R.id.departure, data["currentLocation"])
+            setTextViewText(R.id.arriveLocation, data["destination"])
+            setTextViewText(R.id.departure_time, data["departedTime"])
+            setTextViewText(R.id.arriving_time, data["arrivingTime"])
+            setTextViewText(R.id.flight_status, data["planeStatus"])
+            setTextViewText(R.id.flight_number, data["flightNo"])
 
+//            setTextViewText(R.id.seat, data["seatNo"])
+//            setTextViewText(R.id.gate, data["gateNo"])
+        }
         val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.icons)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())

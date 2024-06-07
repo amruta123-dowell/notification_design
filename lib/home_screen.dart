@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application/flight_data_model.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -80,9 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  showNotificationPlatformChannel() async {
+  showNotificationPlatformChannel(FlightDataModel flightData) async {
     try {
-      await platformChannel.invokeMethod('showCustomNotification');
+      await platformChannel.invokeMethod(
+          'showCustomNotification', flightData.toMap());
     } catch (e) {
       log("error string -----> $e");
     }
@@ -91,33 +93,46 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "PLEASE CLICK ON TO SHOW NOTIFICATION",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
-            textAlign: TextAlign.center,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "PLEASE CLICK ON TO SHOW NOTIFICATION",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () async {
+                  FlightDataModel data = FlightDataModel(
+                      destination: "DEL",
+                      currentLocation: "MAA",
+                      arrivingTime: "23:40",
+                      departedTime: "20:20",
+                      planeStatus: "ON TIME",
+                      flightNo: "37B",
+                      seatNo: "45A",
+                      gateNo: "15A");
+                  showNotificationPlatformChannel(data);
+                },
+                child: Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: Colors.pink,
+                      borderRadius: BorderRadius.circular(10)),
+                  alignment: Alignment.center,
+                  child: const Text("Notification"),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          InkWell(
-            onTap: () async {
-              showNotificationPlatformChannel();
-            },
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                  color: Colors.pink, borderRadius: BorderRadius.circular(10)),
-              alignment: Alignment.center,
-              child: const Text("Notification"),
-            ),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
