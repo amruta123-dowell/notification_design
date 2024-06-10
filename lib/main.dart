@@ -23,14 +23,6 @@ void main() {
   // requestNotificationPermission();
 }
 
-// Future<void> requestNotificationPermission() async {
-//   bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
-//   if (!isAllowed) {
-//     // This will show a native dialog asking for permission to show notifications
-//     await AwesomeNotifications().requestPermissionToSendNotifications();
-//   }
-// }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

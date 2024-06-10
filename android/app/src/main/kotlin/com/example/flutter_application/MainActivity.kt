@@ -56,8 +56,8 @@ class MainActivity : FlutterActivity() {
             setTextViewText(R.id.flight_status, data["planeStatus"])
             setTextViewText(R.id.flight_number, data["flightNo"])
 
-//            setTextViewText(R.id.seat, data["seatNo"])
-//            setTextViewText(R.id.gate, data["gateNo"])
+            setTextViewText(R.id.seat, data["seatNo"])
+            setTextViewText(R.id.gate, data["gateNo"])
         }
         val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.icons)
