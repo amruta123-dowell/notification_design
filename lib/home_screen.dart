@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application/flight_data_model.dart';
+import 'package:flutter_application/progress_bar_widget.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -131,6 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Text("Notification"),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const ProgressBarWidget(progressNo: 100)
             ],
           ),
         ));

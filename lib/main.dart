@@ -1,26 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/home_screen.dart';
 
-import 'package:flutter_application/home_screen2.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // AwesomeNotifications().initialize(
-  //     null,
-  //     [
-  //       NotificationChannel(
-  //         channelKey: 'basic_channel',
-  //         channelName: 'Basic notifications',
-  //         channelDescription: 'Notification channel for basic tests',
-  //         defaultColor: Color(0xFF9D50DD),
-  //         ledColor: Colors.white,
-  //         importance: NotificationImportance.High,
-  //       ),
-  //     ],
-  //     debug: true);
 
   runApp(const MyApp());
-  // requestNotificationPermission();
 }
 
 class MyApp extends StatelessWidget {
@@ -31,3 +15,46 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(home: SafeArea(child: HomeScreen()));
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   static const platform = MethodChannel('flutter/notifications');
+
+//   Future<void> _showNotification() async {
+//     try {
+//       await platform.invokeMethod('showCustomNotification', {
+//         'gateNo': '34B',
+//         'seatNo': '17F',
+//         'departureTime': '20:40',
+//         'arrivalTime': '23:22',
+//         'progress': 50,
+//         "status": "On time",
+//       });
+//     } on PlatformException catch (e) {
+//       print("Failed to show notification: '${e.message}'.");
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Flutter to Native Notification'),
+//         ),
+//         body: Center(
+//           child: ElevatedButton(
+//             onPressed: _showNotification,
+//             child: Text('Show Notification'),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
